@@ -32,7 +32,7 @@ mvn test
 ```
 
 ## 📂 Project Structure
-
+```
 📦 src
  ┣ 📂 main
  ┃ ┗ 📂 java
@@ -41,6 +41,7 @@ mvn test
  ┣ 📂 test
  ┃ ┗ 📂 java
  ┃ ┃ ┗ 📂 com.swaglabs.tests      # Test cases (LoginTest)
+```
  
 ## 📝 License
 This project is for learning purposes and is not affiliated with SauceDemo.
