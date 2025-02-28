@@ -11,7 +11,7 @@ public class Waits {
 
     // Constructor to prevent instantiating this class
     private Waits() {
-
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
     // present - visible - clickable

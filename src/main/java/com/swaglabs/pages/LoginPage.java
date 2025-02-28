@@ -1,12 +1,8 @@
 package com.swaglabs.pages;
 
-import com.swaglabs.utils.BrowserActions;
-import com.swaglabs.utils.CustomSoftAssertion;
-import com.swaglabs.utils.ElementActions;
-import com.swaglabs.utils.Validations;
+import com.swaglabs.utils.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
 public class LoginPage {
 
@@ -34,11 +30,13 @@ public class LoginPage {
 
     // Actions >>> wait - scroll - find - sendKeys
     public LoginPage enterUsername(String username) {
+        // driver, locator, value
         ElementActions.sendData(driver, this.username, username);
         return this;
     }
 
     public LoginPage enterPassword(String password) {
+        // driver, locator, value
         ElementActions.sendData(driver, this.password, password);
         return this;
     }

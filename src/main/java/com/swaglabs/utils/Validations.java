@@ -6,8 +6,8 @@ import org.testng.Assert;
 public class Validations {
 
     // Constructor to prevent instantiating this class
-    public Validations() {
-        // Private constructor
+    private Validations() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
     public static void validateTrue(boolean condition, String message) {
@@ -27,10 +27,12 @@ public class Validations {
     }
 
     public static void validatePageURL(WebDriver driver, String expected) {
+//        Assert.assertEquals(driver.getCurrentUrl(), expected);
         Assert.assertEquals(BrowserActions.getCurrentURL(driver), expected);
     }
 
     public static void validatePageTitle(WebDriver driver, String expected) {
+//         Assert.assertEquals(driver.getTitle(), expected);
         Assert.assertEquals(BrowserActions.getPageTitle(driver), expected);
     }
 }

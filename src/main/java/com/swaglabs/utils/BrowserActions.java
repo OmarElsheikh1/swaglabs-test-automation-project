@@ -6,7 +6,7 @@ public class BrowserActions {
 
     // Constructor to prevent instantiating this class
     private BrowserActions() {
-
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
     public static void navigateToURL(WebDriver driver, String url) {

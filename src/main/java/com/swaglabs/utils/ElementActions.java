@@ -8,7 +8,7 @@ public class ElementActions {
 
     // Constructor to prevent instantiating this class
     private ElementActions() {
-
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
     // sendKeys

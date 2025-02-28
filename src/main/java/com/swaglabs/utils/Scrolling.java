@@ -8,7 +8,7 @@ public class Scrolling {
 
     // Constructor to prevent instantiating this class
     private Scrolling() {
-
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
     // Scroll to element
