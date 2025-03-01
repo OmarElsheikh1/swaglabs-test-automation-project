@@ -15,18 +15,7 @@ public class BrowserFactory {
     public static WebDriver getBrowser(String browserName) {
         switch (browserName.toLowerCase()) {
             case "chrome":
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("start-maximized");
-                options.addArguments("disable-infobars");
-                options.addArguments("--disable-extensions");
-                options.addArguments("--notifications");
-                options.addArguments("--remote-allow-origins=*");
-                Map<String, Object> prefs = Map.of("profile.default_content_setting_values.notifications", 2,
-                        "credentials_enable_service", false,
-                        "profile.password_manager_enabled", false,
-                        "autofill.profile_enabled", false);
-                options.setExperimentalOption("prefs", prefs);
-                options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+                ChromeOptions options = getChromeOptions();
 //                options.addArguments("--headless");
                 return new ChromeDriver(options);
 
@@ -43,20 +32,42 @@ public class BrowserFactory {
                 return new FirefoxDriver();
 
             default:
-                EdgeOptions edgeOptions = new EdgeOptions();
-                edgeOptions.addArguments("start-maximized");
-                edgeOptions.addArguments("disable-infobars");
-                edgeOptions.addArguments("--disable-extensions");
-                edgeOptions.addArguments("--notifications");
-                edgeOptions.addArguments("--remote-allow-origins=*");
-                Map<String, Object> edgePrefs = Map.of("profile.default_content_setting_values.notifications", 2,
-                        "credentials_enable_service", false,
-                        "profile.password_manager_enabled", false,
-                        "autofill.profile_enabled", false);
-                edgeOptions.setExperimentalOption("prefs", edgePrefs);
-                edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+                EdgeOptions edgeOptions = getEdgeOptions();
 //                edgeOptions.addArguments("--headless");
                 return new EdgeDriver(edgeOptions);
         }
     }
+
+    private static ChromeOptions getChromeOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        options.addArguments("disable-infobars");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--notifications");
+        options.addArguments("--remote-allow-origins=*");
+        Map<String, Object> prefs = Map.of("profile.default_content_setting_values.notifications", 2,
+                "credentials_enable_service", false,
+                "profile.password_manager_enabled", false,
+                "autofill.profile_enabled", false);
+        options.setExperimentalOption("prefs", prefs);
+        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        return options;
+    }
+
+    private static EdgeOptions getEdgeOptions() {
+        EdgeOptions edgeOptions = new EdgeOptions();
+        edgeOptions.addArguments("start-maximized");
+        edgeOptions.addArguments("disable-infobars");
+        edgeOptions.addArguments("--disable-extensions");
+        edgeOptions.addArguments("--notifications");
+        edgeOptions.addArguments("--remote-allow-origins=*");
+        Map<String, Object> edgePrefs = Map.of("profile.default_content_setting_values.notifications", 2,
+                "credentials_enable_service", false,
+                "profile.password_manager_enabled", false,
+                "autofill.profile_enabled", false);
+        edgeOptions.setExperimentalOption("prefs", edgePrefs);
+        edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        return edgeOptions;
+    }
+
 }
