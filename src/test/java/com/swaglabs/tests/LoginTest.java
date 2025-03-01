@@ -28,7 +28,6 @@ public class LoginTest {
         new LoginPage(DriverManager.getDriver()).navigateToLoginPage();
     }
 
-
     @AfterMethod
     public void tearDown() {
         // code

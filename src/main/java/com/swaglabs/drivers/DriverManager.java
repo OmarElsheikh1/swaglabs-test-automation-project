@@ -18,7 +18,7 @@ public class DriverManager {
     // Constructor to prevent instantiating this class
     private DriverManager() {
         // We can remove super() , as it's added automatically by Java
-        // super();
+        super();
     }
 
     /**
