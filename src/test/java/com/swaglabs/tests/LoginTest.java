@@ -2,14 +2,22 @@ package com.swaglabs.tests;
 
 import com.swaglabs.drivers.DriverManager;
 import com.swaglabs.pages.LoginPage;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.swaglabs.utils.AllureUtils;
+import com.swaglabs.utils.BrowserActions;
+import com.swaglabs.utils.FilesUtils;
+import com.swaglabs.utils.ScreenshotsUtils;
+import org.testng.annotations.*;
+
+import java.io.File;
 
 public class LoginTest {
 
     // Variables
 //    private WebDriver driver;
+
+    File allure_Results = new File(AllureUtils.ALLURE_RESULTS_PATH);
+//    File allure_Results = new File("test-outputs/allure-results");
+
 
     // Tests
     @Test
@@ -18,9 +26,16 @@ public class LoginTest {
                 .enterPassword("secret_sauce")
                 .clickLoginButton()
                 .assertSuccessfulLogin();
+        ScreenshotsUtils.takeScreenshot("successfulLogin");
     }
 
     // Configurations
+    @BeforeSuite
+    public void beforeSuite() {
+        // code
+        FilesUtils.deleteFiles(allure_Results);
+    }
+
     @BeforeMethod
     public void setup() {
         // code
@@ -31,9 +46,15 @@ public class LoginTest {
     @AfterMethod
     public void tearDown() {
         // code
-        //DriverManager.getDriver().quit();
+        BrowserActions.closeBrowser(DriverManager.getDriver());
 
         // Assert all
         // CustomSoftAssertion.customAssertAll();
+    }
+
+    @AfterClass
+    public void afterClass() {
+        // code
+        AllureUtils.attachLogsToAllureReport();
     }
 }

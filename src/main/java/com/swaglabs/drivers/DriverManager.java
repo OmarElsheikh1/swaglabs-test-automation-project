@@ -1,5 +1,7 @@
 package com.swaglabs.drivers;
 
+import com.swaglabs.utils.LogsUtils;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
 import static org.testng.Assert.fail;
@@ -21,6 +23,8 @@ public class DriverManager {
         super();
     }
 
+    @Step("Creating driver instance on: {browserName}")
+
     /**
      * Creates a new WebDriver instance based on the provided browser name.
      * It retrieves the appropriate WebDriver from the BrowserFactory,
@@ -33,6 +37,10 @@ public class DriverManager {
     public static WebDriver createInstance(String browserName) {
         // Get the WebDriver instance for the specified browser.
         WebDriver driver = BrowserFactory.getBrowser(browserName);
+
+
+        LogsUtils.info("Driver created on:", browserName);
+
         // Store the instance in the ThreadLocal variable.
         setDriver(driver);
         // Return the stored WebDriver instance.
@@ -47,6 +55,9 @@ public class DriverManager {
      */
     public static WebDriver getDriver() {
         if (driverThreadLocal.get() == null) {
+
+            // Log a message indicating that the driver is null.
+            LogsUtils.error("Driver is null. Please set the driver. < It's me Trying out logs>");
             // If the driver is not set, fail the test with an appropriate message.
             fail("Driver is null. Please set the driver.");
         }

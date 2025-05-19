@@ -16,24 +16,14 @@ public class BrowserFactory {
         switch (browserName.toLowerCase()) {
             case "chrome":
                 ChromeOptions options = getChromeOptions();
-//                options.addArguments("--headless");
                 return new ChromeDriver(options);
 
             case "firefox":
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.addArguments("start-maximized");
-                firefoxOptions.addArguments("disable-infobars");
-                firefoxOptions.addArguments("--disable-extensions");
-                firefoxOptions.addArguments("--notifications");
-                firefoxOptions.addArguments("--remote-allow-origins=*");
-                firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-                firefoxOptions.setAcceptInsecureCerts(true);
-//                firefoxOptions.addArguments("--headless");
-                return new FirefoxDriver();
+                FirefoxOptions firefoxOptions = getFirefoxOptions();
+                return new FirefoxDriver(firefoxOptions);
 
             default:
                 EdgeOptions edgeOptions = getEdgeOptions();
-//                edgeOptions.addArguments("--headless");
                 return new EdgeDriver(edgeOptions);
         }
     }
@@ -45,6 +35,7 @@ public class BrowserFactory {
         options.addArguments("--disable-extensions");
         options.addArguments("--notifications");
         options.addArguments("--remote-allow-origins=*");
+        // options.addArguments("--headless");
         Map<String, Object> prefs = Map.of("profile.default_content_setting_values.notifications", 2,
                 "credentials_enable_service", false,
                 "profile.password_manager_enabled", false,
@@ -61,6 +52,7 @@ public class BrowserFactory {
         edgeOptions.addArguments("--disable-extensions");
         edgeOptions.addArguments("--notifications");
         edgeOptions.addArguments("--remote-allow-origins=*");
+        // edgeOptions.addArguments("--headless");
         Map<String, Object> edgePrefs = Map.of("profile.default_content_setting_values.notifications", 2,
                 "credentials_enable_service", false,
                 "profile.password_manager_enabled", false,
@@ -70,4 +62,16 @@ public class BrowserFactory {
         return edgeOptions;
     }
 
+    private static FirefoxOptions getFirefoxOptions() {
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.addArguments("start-maximized");
+        firefoxOptions.addArguments("disable-infobars");
+        firefoxOptions.addArguments("--disable-extensions");
+        firefoxOptions.addArguments("--notifications");
+        firefoxOptions.addArguments("--remote-allow-origins=*");
+        // firefoxOptions.addArguments("--headless");
+        firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        firefoxOptions.setAcceptInsecureCerts(true);
+        return firefoxOptions;
+    }
 }
