@@ -10,7 +10,7 @@ import org.testng.annotations.*;
 
 import java.io.File;
 
-public class LoginTest {
+public class E2e {
 
     // Variables
 //    private WebDriver driver;
