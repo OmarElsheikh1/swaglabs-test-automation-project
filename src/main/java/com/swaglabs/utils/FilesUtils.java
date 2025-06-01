@@ -3,6 +3,7 @@ package com.swaglabs.utils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Collection;
 
 public class FilesUtils {
     private FilesUtils() {
@@ -54,5 +55,11 @@ public class FilesUtils {
 
     public static void copyFile(File source, File destination) throws IOException {
         Files.copy(source.toPath(), destination.toPath());
+    }
+
+
+    // Revise this section again
+    public static Collection<File> listFiles(File file, String[] strings, boolean b) {
+        return java.util.List.of();
     }
 }

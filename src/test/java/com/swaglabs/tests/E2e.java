@@ -2,19 +2,22 @@ package com.swaglabs.tests;
 
 import com.swaglabs.drivers.DriverManager;
 import com.swaglabs.pages.LoginPage;
-import com.swaglabs.utils.AllureUtils;
-import com.swaglabs.utils.BrowserActions;
-import com.swaglabs.utils.FilesUtils;
-import com.swaglabs.utils.ScreenshotsUtils;
+import com.swaglabs.utils.*;
 import org.testng.annotations.*;
 
 import java.io.File;
 
+import static com.swaglabs.utils.PropertiesUtils.getPropertyValue;
+import static com.swaglabs.utils.PropertiesUtils.loadProperties;
+
 public class E2e {
 
     // Variables
+
 //    private WebDriver driver;
 
+    // Load properties
+    JsonUtils testData;
     File allure_Results = new File(AllureUtils.ALLURE_RESULTS_PATH);
 //    File allure_Results = new File("test-outputs/allure-results");
 
@@ -32,14 +35,17 @@ public class E2e {
     // Configurations
     @BeforeSuite
     public void beforeSuite() {
-        // code
+        // Load properties
+        loadProperties();
         FilesUtils.deleteFiles(allure_Results);
+        testData = new JsonUtils("test-data");
     }
 
     @BeforeMethod
     public void setup() {
         // code
-        DriverManager.createInstance("edge");
+        String browserName = getPropertyValue("browserType");
+        DriverManager.createInstance(browserName);
         new LoginPage(DriverManager.getDriver()).navigateToLoginPage();
     }
 

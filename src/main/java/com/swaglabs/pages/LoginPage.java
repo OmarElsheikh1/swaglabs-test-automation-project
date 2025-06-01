@@ -5,6 +5,8 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static com.swaglabs.utils.PropertiesUtils.getPropertyValue;
+
 public class LoginPage {
 
     // Variables
@@ -62,13 +64,15 @@ public class LoginPage {
     // Validations (TestNG)
     @Step ("Assert login page URL")
     public LoginPage assertLoginPageURL() {
-        CustomSoftAssertion.softAssertion.assertEquals(BrowserActions.getCurrentURL(driver), "https://www.saucedemo.com/inventory.html", "URL isn't as expected");
+//        CustomSoftAssertion.softAssertion.assertEquals(BrowserActions.getCurrentURL(driver), "https://www.saucedemo.com/inventory.html", "URL isn't as expected");
+        CustomSoftAssertion.softAssertion.assertEquals(BrowserActions.getCurrentURL(driver), getPropertyValue("homeURL"), "URL isn't as expected");
         return this;
     }
 
     @Step ("Assert login page title")
     public LoginPage assertLoginPageTitle() {
-        CustomSoftAssertion.softAssertion.assertEquals(BrowserActions.getPageTitle(driver), "Swag Labs", "Title isn't as expected");
+//        CustomSoftAssertion.softAssertion.assertEquals(BrowserActions.getPageTitle(driver), "Swag Labs", "Title isn't as expected");
+        CustomSoftAssertion.softAssertion.assertEquals(BrowserActions.getPageTitle(driver), getPropertyValue("appTitle"), "Title isn't as expected");
         return this;
     }
 
@@ -80,13 +84,15 @@ public class LoginPage {
 
     @Step ("Assert successful login")
     public LoginPage assertSuccessfulLogin() {
-        Validations.validatePageURL(driver, "https://www.saucedemo.com/inventory.html");
+//        Validations.validatePageURL(driver, "https://www.saucedemo.com/inventory.html");
+        Validations.validatePageURL(driver, getPropertyValue("homeURL"));
+
         return this;
     }
 
     @Step ("Assert unsuccessful login")
     public LoginPage assertUnsuccessfulLogin() {
-        Validations.validateEquals(getErrorMessage(), "Epic sadface: Username and password do not match any user in this service", "Error message isn't as expected");
+        Validations.validateEquals(getErrorMessage(), getPropertyValue("errorMSG"), "Error message isn't as expected");
         return this;
     }
 

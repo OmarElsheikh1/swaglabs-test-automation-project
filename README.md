@@ -34,7 +34,7 @@ mvn test
 ## 📂 Project Structure
 ```
 📦 src
- ┣ 📂 main
+ ┣ 📂 mainTry
  ┃ ┗ 📂 java
  ┃ ┃ ┣ 📂 com.swaglabs.pages      # Page Object Model (POM)
  ┃ ┃ ┗ 📂 com.swaglabs.utils      # Utility classes (Waits, Actions, etc.)
