@@ -29,8 +29,7 @@ public class JsonUtils {
         } catch (Exception e) {
             LogsUtils.error(e.getMessage(), "No results for json path: '" + jsonPath + "' in the json file: '" + this.jsonFileName + "'");
         }
-        LogsUtils.info("Json path: '" + jsonPath + "' in the json file: '" + this.jsonFileName + "' has value: '" + testData + "'");
+//        LogsUtils.info("Json path: '" + jsonPath + "' in the json file: '" + this.jsonFileName + "' has value: '" + testData + "'");
         return testData;
     }
-
 }

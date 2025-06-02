@@ -1,5 +1,6 @@
 package com.swaglabs.drivers;
 
+import com.swaglabs.utils.PropertiesUtils;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,19 +14,20 @@ import java.util.Map;
 
 public class BrowserFactory {
     public static WebDriver getBrowser(String browserName) {
-        switch (browserName.toLowerCase()) {
-            case "chrome":
+        return switch (browserName.toLowerCase()) {
+            case "chrome" -> {
                 ChromeOptions options = getChromeOptions();
-                return new ChromeDriver(options);
-
-            case "firefox":
+                yield new ChromeDriver(options);
+            }
+            case "firefox" -> {
                 FirefoxOptions firefoxOptions = getFirefoxOptions();
-                return new FirefoxDriver(firefoxOptions);
-
-            default:
+                yield new FirefoxDriver(firefoxOptions);
+            }
+            default -> {
                 EdgeOptions edgeOptions = getEdgeOptions();
-                return new EdgeDriver(edgeOptions);
-        }
+                yield new EdgeDriver(edgeOptions);
+            }
+        };
     }
 
     private static ChromeOptions getChromeOptions() {
@@ -35,7 +37,9 @@ public class BrowserFactory {
         options.addArguments("--disable-extensions");
         options.addArguments("--notifications");
         options.addArguments("--remote-allow-origins=*");
-        // options.addArguments("--headless");
+        if (PropertiesUtils.getPropertyValue("executionType").equalsIgnoreCase("local")) {
+            options.addArguments("--headless");
+        }
         Map<String, Object> prefs = Map.of("profile.default_content_setting_values.notifications", 2,
                 "credentials_enable_service", false,
                 "profile.password_manager_enabled", false,
@@ -52,7 +56,9 @@ public class BrowserFactory {
         edgeOptions.addArguments("--disable-extensions");
         edgeOptions.addArguments("--notifications");
         edgeOptions.addArguments("--remote-allow-origins=*");
-        // edgeOptions.addArguments("--headless");
+        if (PropertiesUtils.getPropertyValue("executionType").equalsIgnoreCase("local")) {
+            edgeOptions.addArguments("--headless");
+        }
         Map<String, Object> edgePrefs = Map.of("profile.default_content_setting_values.notifications", 2,
                 "credentials_enable_service", false,
                 "profile.password_manager_enabled", false,
@@ -69,7 +75,9 @@ public class BrowserFactory {
         firefoxOptions.addArguments("--disable-extensions");
         firefoxOptions.addArguments("--notifications");
         firefoxOptions.addArguments("--remote-allow-origins=*");
-        // firefoxOptions.addArguments("--headless");
+        if (PropertiesUtils.getPropertyValue("executionType").equalsIgnoreCase("local")) {
+            firefoxOptions.addArguments("--headless");
+        }
         firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         firefoxOptions.setAcceptInsecureCerts(true);
         return firefoxOptions;

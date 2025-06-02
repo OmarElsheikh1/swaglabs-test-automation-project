@@ -25,8 +25,13 @@ public class E2e {
     // Tests
     @Test
     public void successfulLogin() {
-        new LoginPage(DriverManager.getDriver()).enterUsername("standard_user")
-                .enterPassword("secret_sauce")
+//        new LoginPage(DriverManager.getDriver()).enterUsername("standard_user")
+//                .enterPassword("secret_sauce")
+//                .clickLoginButton()
+//                .assertSuccessfulLogin();
+//        ScreenshotsUtils.takeScreenshot("successfulLogin");
+        new LoginPage(DriverManager.getDriver()).enterUsername(testData.getJsonData("login-credentials.username"))
+                .enterPassword(testData.getJsonData("login-credentials.password"))
                 .clickLoginButton()
                 .assertSuccessfulLogin();
         ScreenshotsUtils.takeScreenshot("successfulLogin");
@@ -45,6 +50,10 @@ public class E2e {
     public void setup() {
         // code
         String browserName = getPropertyValue("browserType");
+        System.out.println("Browser Name: " + browserName);     // Debug
+        if (browserName == null) {
+            throw new IllegalStateException("browserType property is not set in web.properties");
+        }
         DriverManager.createInstance(browserName);
         new LoginPage(DriverManager.getDriver()).navigateToLoginPage();
     }
